@@ -74,7 +74,6 @@ public class WebScraper {
 	
 	@PreDestroy
 	private void disposeExecutor() {
-		System.out.println("SHUTDOWN!!!");
 		executorService.shutdown();
 	}
 
@@ -85,13 +84,14 @@ public class WebScraper {
 			
 			
 			Set<String> storedLinks = new HashSet<String>();
-			for (int i = 0; i < depth; i++) {
+			for (int i = 0; i <= depth; i++) {
 				if (i == 0) {
 					List<String> currentLevelLinks = new ArrayList<String>();
 					levelLinks.put(i, currentLevelLinks);
 					extractCurrentLevelLinks(initialUrl, storedLinks, i, currentLevelLinks);
 
-				} else{
+				} 
+				else{
 					List<String> prevLevelLinks = levelLinks.get(i - 1);
 					List<String> currentLevelLinks = new ArrayList<String>();
 					levelLinks.put(i, currentLevelLinks);
@@ -100,7 +100,6 @@ public class WebScraper {
 
 					}
 				}
-				System.out.println(levelLinks);
 			}
 
 		} catch (IOException e) {
